@@ -16,7 +16,7 @@ def standing():
     return("\n"+ random_name)
 
 def fold():
-    """returns random standing pose name"""
+    """returns random seated fold pose name"""
     f = open('names/folds.txt')
     lines = f.readlines()
 
@@ -93,21 +93,6 @@ def inversion():
 def seated():
     """returns out random seated pose name"""
     f = open('names/seated.txt')
-    lines = f.readlines()
-
-    names = []
-
-    for line in lines:
-        if line != "\n":
-            names.append(line)
-
-    random_name = random.choice(names)
-
-    return(random_name)
-
-def prone():
-    """returns out random prone pose name"""
-    f = open('names/prone.txt')
     lines = f.readlines()
 
     names = []

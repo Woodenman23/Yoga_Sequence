@@ -29,13 +29,14 @@ class Window(Frame):
 def sequence():
     return("Sun Salutation \n",
     standing(),
+    standing(),
     standing(), "\n",
-    fold(), "\n",
-    twist(), "\n",
-    backbend(), "\n",
     seated(), "\n",
-    prone(), "\n",
-    supine(), "\n",
+    twist(), "\n",
+    fold(), "\n",
+    seated(), "\n",
+    inversion(), "\n",
+    backbend(), "\n",
     "Shavasana")
 
 
