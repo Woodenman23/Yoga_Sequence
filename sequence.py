@@ -9,7 +9,7 @@ from helpers import *
 # intitialise tkinter     
 root = Tk()
 # window size
-root.geometry("700x1000")
+root.geometry("700x900")
 # set window title
 root.wm_title("Yoga Sequencer")
 
@@ -25,12 +25,12 @@ class Window(Frame):
         yoga_pose = sequence()
 
         pose_image = Label(root)
-        pose_image.place(x= 40, y =200)
+        pose_image.place(x= 40, y =50)
 
 
         # place pose name in window
         pose_name = Label(self, text="", fg="Green", font=("Helvetica", 18))
-        pose_name.place(x=40,y=600)
+        pose_name.place(x=40,y=450)
         #text.pack()
 
         ## place image under pose name
@@ -65,7 +65,7 @@ class Window(Frame):
 
         # make list of images
         images = [img1, img2, img3, img4, img5, img6]
-        names = [standing(), seated(), twist(), inversion(), "Shavasana"]
+        names = [standing(), seated(), twist(), inversion(), backbend(), "Shavasana"]
         
         def start():
             global i # use global i
@@ -76,14 +76,20 @@ class Window(Frame):
                 root.after(2000, start) # run update again with i+1
 
         # create buttons
-        btn1 = Button(self, text="Shart", bg='black', fg='gold', width=6, font=('ariel 20 bold'), relief=GROOVE, command=start)
-        btn1.place(x=200, y=50)
+        btnStart = Button(self, text="Start", bg='black', fg='gold', width=6, font=('ariel 20 bold'), relief=GROOVE, command=start)
+        btnStart.place(x=550, y=50)
 
-        # initialise exit button
+        btnPause = Button(self, text="Pause", bg='black', fg='gold', width=6, font=('ariel 20 bold'), relief=GROOVE, command=start)
+        btnPause.place(x=550, y=120)
+
+        btnInfo = Button(self, text="Info", bg='black', fg='gold', width=6, font=('ariel 20 bold'), relief=GROOVE, command=start)
+        btnInfo.place(x=550, y=190)
+
+        btnExit = Button(self, text="Exit", bg='black', fg='gold', width=6, font=('ariel 20 bold'), relief=GROOVE, command=self.clickExitButton)
+        btnExit.place(x=550, y=260)
+
         self.pack(fill=BOTH, expand=1)
-        exitButton = Button(self, text="Exit", command=self.clickExitButton)
-        exitButton.place(x=0, y=0)
-
+        
     # exit button callback
     def clickExitButton(self):
         exit()
