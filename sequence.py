@@ -9,7 +9,7 @@ from helpers import *
 # intitialise tkinter     
 root = Tk()
 # window size
-root.geometry("700x900")
+root.geometry("700x700")
 # set window title
 root.wm_title("Yoga Sequencer")
 
@@ -21,8 +21,11 @@ class Window(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.master = master
+        
+        
 
-        yoga_pose = sequence()
+        # set background color
+        self.configure(bg = "blue")
 
         pose_image = Label(root)
         pose_image.place(x= 40, y =50)
@@ -35,55 +38,84 @@ class Window(Frame):
 
         ## place image under pose name
         # load images
-        image1 = Image.open('images/pose1.jpg')
-        image1 = image1.resize((500,400), Image.ANTIALIAS)
+        Bow = Image.open('images/Bow.jpg')
+        Bow = Bow.resize((500,400), Image.ANTIALIAS)
 
-        image2 = Image.open('images/pose2.jpg')
-        image2 = image2.resize((500,400), Image.ANTIALIAS)
+        Camel = Image.open('images/Camel.jpg')
+        Camel = Camel.resize((500,400), Image.ANTIALIAS)
 
-        image3 = Image.open('images/pose3.jpg')
-        image3 = image3.resize((500,400), Image.ANTIALIAS)
+        Cobra = Image.open('images/Cobra.jpg')
+        Cobra = Cobra.resize((500,400), Image.ANTIALIAS)
 
-        image4 = Image.open('images/pose4.jpg')
-        image4 = image4.resize((500,400), Image.ANTIALIAS)
+        DownwardDog = Image.open('images/DownwardDog.jpg')
+        DownwardDog = DownwardDog.resize((500,400), Image.ANTIALIAS)
 
-        image5 = Image.open('images/pose5.jpg')
-        image5 = image5.resize((500,400), Image.ANTIALIAS)
+        ForwardFold = Image.open('images/ForwardFold.jpg')
+        ForwardFold = ForwardFold.resize((500,400), Image.ANTIALIAS)
 
-        image6 = Image.open('images/pose6.jpg')
-        image6 = image6.resize((500,400), Image.ANTIALIAS)
+        Plough = Image.open('images/Plough.jpg')
+        Plough = Plough.resize((500,400), Image.ANTIALIAS)
+
+        SeatedTwist = Image.open('images/SeatedTwist.jpg')
+        SeatedTwist = SeatedTwist.resize((500,400), Image.ANTIALIAS)
+
+        Shavasana = Image.open('images/Shavasana.jpg')
+        Shavasana = Shavasana.resize((500,400), Image.ANTIALIAS)
+
+        Triangle = Image.open('images/Triangle.jpg')
+        Triangle = Triangle.resize((500,400), Image.ANTIALIAS)
+
+        Warrior1 = Image.open('images/Warrior1.jpg')
+        Warrior1 = Warrior1.resize((500,400), Image.ANTIALIAS)
+
+        Warrior2 = Image.open('images/Warrior2.jpg')
+        Warrior2 = Warrior2.resize((500,400), Image.ANTIALIAS)
+
+        Wheel = Image.open('images/Wheel.jpg')
+        Wheel = Wheel.resize((500,400), Image.ANTIALIAS)
+
 
         
 
         # make images usable for tkinter labels
-        img1 = ImageTk.PhotoImage(image1)
-        img2 = ImageTk.PhotoImage(image2)
-        img3 = ImageTk.PhotoImage(image3)
-        img4 = ImageTk.PhotoImage(image4)
-        img5 = ImageTk.PhotoImage(image5)
-        img6 = ImageTk.PhotoImage(image6)
+        img1 = ImageTk.PhotoImage(Bow)
+        img2 = ImageTk.PhotoImage(Camel)
+        img3 = ImageTk.PhotoImage(Cobra)
+        img4 = ImageTk.PhotoImage(DownwardDog)
+        img5 = ImageTk.PhotoImage(ForwardFold)
+        img6 = ImageTk.PhotoImage(Plough)
+        img7 = ImageTk.PhotoImage(SeatedTwist)
+        img8 = ImageTk.PhotoImage(Shavasana)
+        img9 = ImageTk.PhotoImage(Triangle)
+        img10 = ImageTk.PhotoImage(Warrior1)
+        img11 = ImageTk.PhotoImage(Warrior2)
+        img12 = ImageTk.PhotoImage(Wheel)
 
-        # make list of images
-        images = [img1, img2, img3, img4, img5, img6]
-        names = [standing(), seated(), twist(), inversion(), backbend(), "Shavasana"]
+        names = ["Downward Facing Dog Pose", "Forward Fold", "Bow Pose", "Camel Pose", "Cobra Pose", "Plough Pose", "Seated Twist Pose", "Triangle Pose", "Warrior 1 Pose", "Warrior 2 Pose", "Wheel Pose"]
+
+
+        # rudimentry version of random sequence generator
+        sequence = [random.choice(names), random.choice(names), random.choice(names), random.choice(names), random.choice(names), random.choice(names), "Shavasana"]
         
+        # dictionary associating pose names with images
+        images = {"Bow Pose": img1, "Camel Pose": img2, "Cobra Pose": img3, "Downward Facing Dog Pose": img4, "Forward Fold": img5, "Plough Pose" :img6, "Shavasana" : img8, "Seated Twist Pose" : img7, "Triangle Pose" : img9, "Warrior 1 Pose" : img10, "Warrior 2 Pose" : img11, "Wheel Pose" : img12 }
+    
+        # button functions
         def start():
             global i # use global i
-            pose_image['image'] = images[i]
-            pose_name["text"] = names[i]
-            if i < len(images)-1:
-                i +=1
-                root.after(2000, start) # run update again with i+1
+            pose_name["text"] = sequence[i]
+            try:
+                pose_image['image'] = images[pose_name["text"]]
+            except KeyError:
+                pose_image["image"] = images["Bow Pose"]
+            if i < len(sequence) - 1 :
+                i += 1
+                root.after(5000, start) # run update again with i+1
+            
 
         # create buttons
         btnStart = Button(self, text="Start", bg='black', fg='gold', width=6, font=('ariel 20 bold'), relief=GROOVE, command=start)
         btnStart.place(x=550, y=50)
-
-        btnPause = Button(self, text="Pause", bg='black', fg='gold', width=6, font=('ariel 20 bold'), relief=GROOVE, command=start)
-        btnPause.place(x=550, y=120)
-
-        btnInfo = Button(self, text="Info", bg='black', fg='gold', width=6, font=('ariel 20 bold'), relief=GROOVE, command=start)
-        btnInfo.place(x=550, y=190)
 
         btnExit = Button(self, text="Exit", bg='black', fg='gold', width=6, font=('ariel 20 bold'), relief=GROOVE, command=self.clickExitButton)
         btnExit.place(x=550, y=260)
@@ -94,12 +126,6 @@ class Window(Frame):
     def clickExitButton(self):
         exit()
     
-def sequence():
-    return(standing(),
-    )
-
-
-
 app = Window(root)
 # show window
 root.mainloop()
