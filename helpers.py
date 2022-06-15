@@ -94,15 +94,11 @@ def seated():
     """returns out random seated pose name"""
     f = open('names/seated.txt')
     lines = f.readlines()
-
     names = []
-
     for line in lines:
         if line != "\n":
             names.append(line)
-
     random_name = random.choice(names)
-
     return(random_name)
 
 def supine():
