@@ -1,4 +1,3 @@
-
 import tkinter as tk
 from tkinter import *
 from PIL import Image, ImageTk
@@ -15,17 +14,10 @@ root.wm_title("Yoga Sequencer")
 
 i = 0
 
-
-
 class Window(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.master = master
-        
-        
-
-        # set background color
-        self.configure(bg = "blue")
 
         pose_image = Label(root)
         pose_image.place(x= 40, y =50)
@@ -74,10 +66,7 @@ class Window(Frame):
         Wheel = Image.open('images/Wheel.jpg')
         Wheel = Wheel.resize((500,400), Image.ANTIALIAS)
 
-
-        
-
-        # make images usable for tkinter labels
+        # make images usable as tkinter labels
         img1 = ImageTk.PhotoImage(Bow)
         img2 = ImageTk.PhotoImage(Camel)
         img3 = ImageTk.PhotoImage(Cobra)
@@ -91,16 +80,16 @@ class Window(Frame):
         img11 = ImageTk.PhotoImage(Warrior2)
         img12 = ImageTk.PhotoImage(Wheel)
 
+        # list of pose names for sequence to pull from
         names = ["Downward Facing Dog Pose", "Forward Fold", "Bow Pose", "Camel Pose", "Cobra Pose", "Plough Pose", "Seated Twist Pose", "Triangle Pose", "Warrior 1 Pose", "Warrior 2 Pose", "Wheel Pose"]
 
-
-        # rudimentry version of random sequence generator
+        # generate random sequence of 6 poses, followed by shavasana
         sequence = [random.choice(names), random.choice(names), random.choice(names), random.choice(names), random.choice(names), random.choice(names), "Shavasana"]
         
         # dictionary associating pose names with images
         images = {"Bow Pose": img1, "Camel Pose": img2, "Cobra Pose": img3, "Downward Facing Dog Pose": img4, "Forward Fold": img5, "Plough Pose" :img6, "Shavasana" : img8, "Seated Twist Pose" : img7, "Triangle Pose" : img9, "Warrior 1 Pose" : img10, "Warrior 2 Pose" : img11, "Wheel Pose" : img12 }
     
-        # button functions
+        # function that runs the sequence when user presses "start"
         def start():
             global i # use global i
             pose_name["text"] = sequence[i]
@@ -118,7 +107,7 @@ class Window(Frame):
         btnStart.place(x=550, y=50)
 
         btnExit = Button(self, text="Exit", bg='black', fg='gold', width=6, font=('ariel 20 bold'), relief=GROOVE, command=self.clickExitButton)
-        btnExit.place(x=550, y=260)
+        btnExit.place(x=550, y=120)
 
         self.pack(fill=BOTH, expand=1)
         
